@@ -187,6 +187,7 @@
     font-size: 16px; border: none; background: #F1F3F5; color: #868E96;
     border-radius: 999px; width: 32px; height: 32px; cursor: pointer; flex-shrink: 0;
   }
+  .loading-pic { font-family: 'Jua', sans-serif; text-align: center; color: #ADB5BD; font-size: 18px; padding: 60px 0; }
   .hidden { display: none; }
   button:focus-visible { outline: 3px solid #4C6EF5; outline-offset: 3px; }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
@@ -792,7 +793,7 @@ function scheduleSave(name, fn) {
   saveTimers[name] = setTimeout(fn, 600);
 }
 function saveCustomPics() {
-  const customs = PICTURES.filter(p => p.type === "raster").map(p => ({
+  const customs = PICTURES.filter(p => p.type === "raster" && !p.remote).map(p => ({
     label: p.label,
     orig: p.origURL,
     cur: p.canvas.toDataURL("image/png"),
@@ -810,6 +811,8 @@ async function loadSaved() {
   }
   const gal = await storeGet("gallery");
   if (Array.isArray(gal)) galleryEntries = gal;
+  const rs = await storeGet("remotePics");
+  if (rs && typeof rs === "object") remoteState = rs;
   const savedName = await storeGet("lastName");
   if (typeof savedName === "string") lastName = savedName;
   const customs = await storeGet("customPics");
@@ -835,6 +838,83 @@ async function loadSaved() {
     }
     rebuildPicTabs();
   }
+}
+
+let remoteState = {}; // pics 폴더 그림들의 색칠 상태 {파일명: dataURL}
+function saveRemoteState() {
+  for (const p of PICTURES) {
+    if (p.remote && p.canvas) remoteState[p.rname] = p.canvas.toDataURL("image/png");
+  }
+  storeSet("remotePics", remoteState);
+}
+
+// GitHub Pages의 pics 폴더에서 도안 목록 자동으로 읽어오기
+async function fetchRemotePicList() {
+  let files = [];
+  try {
+    const host = location.hostname;
+    if (host.endsWith(".github.io")) {
+      const owner = host.split(".")[0];
+      const seg = location.pathname.split("/").filter(Boolean);
+      const repo = seg[0];
+      if (owner && repo) {
+        const r = await fetch("https://api.github.com/repos/" + owner + "/" + repo + "/contents/pics");
+        if (r.ok) {
+          const j = await r.json();
+          if (Array.isArray(j)) {
+            files = j.filter(f => f.type === "file" && /\.(png|jpe?g|webp|gif)$/i.test(f.name)).map(f => f.name);
+          }
+        }
+      }
+    }
+  } catch (e) {}
+  // 대체 수단: pics/list.json (["파일명.png", ...] 형태)
+  if (!files.length) {
+    try {
+      const r = await fetch("pics/list.json");
+      if (r.ok) { const j = await r.json(); if (Array.isArray(j)) files = j; }
+    } catch (e) {}
+  }
+  return files;
+}
+
+async function loadRemotePics() {
+  let files = await fetchRemotePicList();
+  if (files.length) storeSet("picListCache", files);
+  else files = (await storeGet("picListCache")) || []; // 오프라인이면 지난 목록 사용
+  if (!files.length) return;
+  let insertAt = PICTURES.findIndex(p => p.type === "raster");
+  if (insertAt === -1) insertAt = PICTURES.length;
+  for (const name of files) {
+    let label = name.replace(/\.[^.]+$/, "").replace(/^도안[_-]?/, "");
+    if (label.length > 12) label = label.slice(0, 12) + "…";
+    PICTURES.splice(insertAt++, 0, {
+      id: "remote:" + name,
+      label: "🖼️ " + label,
+      type: "remote",
+      rname: name,
+      url: "pics/" + encodeURIComponent(name),
+    });
+  }
+  rebuildPicTabs();
+}
+
+function upgradeRemotePic(pic, img) {
+  const rp = makeRasterPicture(img, pic.label);
+  rp.id = pic.id;
+  rp.remote = true;
+  rp.rname = pic.rname;
+  PICTURES[PICTURES.indexOf(pic)] = rp;
+  // 저장돼 있던 색칠 상태 복원
+  const cur = remoteState[rp.rname];
+  if (cur) {
+    const cimg = new Image();
+    cimg.onload = () => {
+      rp.ctx.drawImage(cimg, 0, 0, rp.canvas.width, rp.canvas.height);
+    };
+    cimg.src = cur;
+  }
+  return rp;
 }
 
 const picExtraEl = document.getElementById("pic-extra");
@@ -918,11 +998,12 @@ function makeRasterPicture(img, label) {
     const rect = canvas.getBoundingClientRect();
     const x = Math.floor((e.clientX - rect.left) * canvas.width / rect.width);
     const y = Math.floor((e.clientY - rect.top) * canvas.height / rect.height);
-    if (eraser) { floodFill(pic, x, y, null); scheduleSave("pics", saveCustomPics); return; }
+    const doSave = () => pic.remote ? scheduleSave("remote", saveRemoteState) : scheduleSave("pics", saveCustomPics);
+    if (eraser) { floodFill(pic, x, y, null); doSave(); return; }
     const brush = mixDrops(brushDrops);
     if (!brush) { flashBrushLabel(); return; }
     floodFill(pic, x, y, hexToRgb255(brush.hex));
-    scheduleSave("pics", saveCustomPics);
+    doSave();
   });
   return pic;
 }
@@ -1011,9 +1092,23 @@ function showPicture() {
   resetZoom();
   const pic = PICTURES.find(p => p.id === currentPic);
   picExtraEl.innerHTML = "";
+  if (pic.type === "remote") {
+    canvasEl.innerHTML = '<div class="loading-pic">그림 불러오는 중… ⏳</div>';
+    const img = new Image();
+    img.onload = () => {
+      const rp = upgradeRemotePic(pic, img);
+      if (currentPic === rp.id) showPicture();
+    };
+    img.onerror = () => {
+      canvasEl.innerHTML = '<div class="loading-pic">그림을 못 불러왔어 😢<br>인터넷 연결을 확인해봐!</div>';
+    };
+    img.src = pic.url;
+    return;
+  }
   if (pic.type === "raster") {
     canvasEl.innerHTML = "";
     canvasEl.appendChild(pic.canvas);
+    if (pic.remote) return; // pics 폴더 그림은 빼기 버튼 없음
     const rm = document.createElement("button");
     rm.className = "chip";
     rm.textContent = "❌ 이 그림 빼기";
@@ -1106,7 +1201,8 @@ wipeBtn.addEventListener("click", () => {
   const pic = PICTURES.find(p => p.id === currentPic);
   if (pic.type === "raster") {
     pic.ctx.putImageData(pic.original, 0, 0);
-    scheduleSave("pics", saveCustomPics);
+    if (pic.remote) scheduleSave("remote", saveRemoteState);
+    else scheduleSave("pics", saveCustomPics);
     return;
   }
   savedFills[currentPic] = {};
@@ -1397,7 +1493,7 @@ applyZoom();
 rebuildPicTabs();
 showPicture();
 renderBrush();
-loadSaved().catch(() => {});
+loadSaved().catch(() => {}).then(() => loadRemotePics()).catch(() => {});
 
 /* ═══════ 모드 전환 ═══════ */
 const tabFree = document.getElementById("tab-free");
