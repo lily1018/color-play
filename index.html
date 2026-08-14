@@ -146,6 +146,47 @@
   .tool-btn.active { border-color: #343A40; background: #FFF3BF; }
   .mini-recipe { text-align: center; font-size: 14px; color: #868E96; min-height: 20px; margin-bottom: 4px; }
   .palette.mini { gap: 13px; margin-top: 10px; }
+  .modal-bg {
+    position: fixed; inset: 0; background: rgba(52,58,64,0.45);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 50; padding: 16px;
+  }
+  .modal {
+    background: #FFF; border-radius: 24px; padding: 20px;
+    width: 100%; max-width: 430px; max-height: 80vh; overflow-y: auto;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  }
+  .modal h2 { font-family: 'Jua', sans-serif; font-weight: normal; font-size: 22px; margin: 0 0 6px; }
+  .modal .desc { font-family: 'Jua', sans-serif; font-size: 15px; color: #868E96; margin-bottom: 12px; }
+  .name-input {
+    font-family: 'Jua', sans-serif; font-size: 18px; width: 100%;
+    padding: 10px 14px; border-radius: 14px; border: 2.5px solid #DEE2E6; outline: none;
+  }
+  .name-input:focus { border-color: #4C6EF5; }
+  .name-chip {
+    font-family: 'Jua', sans-serif; font-size: 16px; padding: 6px 14px;
+    border-radius: 999px; border: 2.5px solid #DEE2E6; background: #FFF;
+    color: #343A40; cursor: pointer;
+  }
+  .name-chip.active { border-color: #343A40; background: #FFF3BF; }
+  .gallery-item {
+    display: flex; gap: 10px; align-items: center;
+    border: 2px solid #E9ECEF; border-radius: 16px; padding: 8px; margin-bottom: 8px;
+    cursor: pointer;
+  }
+  .gallery-thumb {
+    width: 76px; height: 58px; flex-shrink: 0; border-radius: 10px;
+    border: 1.5px solid #E9ECEF; background: #FFF; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .gallery-thumb img, .gallery-thumb svg { max-width: 100%; max-height: 100%; display: block; }
+  .gallery-info { flex: 1; font-family: 'Jua', sans-serif; min-width: 0; }
+  .gallery-info .who { font-size: 17px; }
+  .gallery-info .what { font-size: 14px; color: #868E96; }
+  .gallery-del {
+    font-size: 16px; border: none; background: #F1F3F5; color: #868E96;
+    border-radius: 999px; width: 32px; height: 32px; cursor: pointer; flex-shrink: 0;
+  }
   .hidden { display: none; }
   button:focus-visible { outline: 3px solid #4C6EF5; outline-offset: 3px; }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
@@ -197,6 +238,10 @@
       <button class="tool-btn" id="zoom-level" style="min-width:74px;">100%</button>
       <button class="tool-btn" id="zoom-in">🔍 ➕</button>
     </div>
+    <div class="controls" style="margin:0 0 8px;">
+      <button class="tool-btn" id="save-work-btn">💾 작품 저장</button>
+      <button class="tool-btn" id="gallery-btn">📂 저장한 그림</button>
+    </div>
     <div class="controls" id="pic-extra" style="margin:0 0 6px;"></div>
     <div style="text-align:center;font-size:13px;color:#ADB5BD;margin-bottom:8px;">✨ 그림과 색칠한 내용은 이 기기에 자동 저장돼요</div>
     <input type="file" id="pic-file" accept="image/*" style="display:none">
@@ -209,6 +254,31 @@
     <div class="mini-recipe" id="mini-recipe"></div>
     <div class="palette mini" id="mini-palette"></div>
     <div class="controls" id="mini-controls"></div>
+  </div>
+</div>
+
+<div class="modal-bg hidden" id="save-modal">
+  <div class="modal">
+    <h2>💾 작품 저장하기</h2>
+    <div class="desc">누가 색칠했는지 이름을 골라줘!</div>
+    <div id="name-chips" style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px;"></div>
+    <input class="name-input" id="name-input" placeholder="이름 쓰기" maxlength="10">
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px;">
+      <button class="tool-btn" id="save-cancel">취소</button>
+      <button class="next-btn" style="margin:0;font-size:17px;padding:9px 24px;" id="save-confirm">저장!</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg hidden" id="gallery-modal">
+  <div class="modal">
+    <h2>📂 저장한 그림</h2>
+    <div class="desc">누른 작품을 이어서 색칠할 수 있어!</div>
+    <div id="gallery-filter" style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px;"></div>
+    <div id="gallery-list"></div>
+    <div style="display:flex;justify-content:flex-end;margin-top:8px;">
+      <button class="tool-btn" id="gallery-close">닫기</button>
+    </div>
   </div>
 </div>
 
@@ -664,7 +734,7 @@ const PICTURES = [
     <circle data-fill="center" cx="200" cy="118" r="27" ${S}/>` },
 ];
 
-const MAX_BRUSH_DROPS = 6;
+const MAX_BRUSH_DROPS = 10;
 let brushDrops = {};
 let eraser = false;
 let currentPic = "car";
@@ -738,6 +808,10 @@ async function loadSaved() {
     const pic = PICTURES.find(p => p.id === currentPic);
     if (pic && pic.type !== "raster") showPicture();
   }
+  const gal = await storeGet("gallery");
+  if (Array.isArray(gal)) galleryEntries = gal;
+  const savedName = await storeGet("lastName");
+  if (typeof savedName === "string") lastName = savedName;
   const customs = await storeGet("customPics");
   if (customs && customs.length) {
     for (const c of customs) {
@@ -1039,6 +1113,194 @@ wipeBtn.addEventListener("click", () => {
   for (const el of canvasEl.querySelectorAll("[data-fill]")) el.setAttribute("fill", "#FFFFFF");
   scheduleSave("svg", saveSvgFills);
 });
+
+/* ── 작품 저장 / 불러오기 (갤러리) ── */
+let galleryEntries = [];
+let lastName = "";
+let galleryFilter = null;
+
+const saveModal = document.getElementById("save-modal");
+const galleryModal = document.getElementById("gallery-modal");
+const nameChipsEl = document.getElementById("name-chips");
+const nameInputEl = document.getElementById("name-input");
+const galleryFilterEl = document.getElementById("gallery-filter");
+const galleryListEl = document.getElementById("gallery-list");
+
+function allNames() {
+  const s = [];
+  if (lastName) s.push(lastName);
+  for (const e of galleryEntries) if (!s.includes(e.name)) s.push(e.name);
+  return s;
+}
+
+document.getElementById("save-work-btn").addEventListener("click", () => {
+  nameChipsEl.innerHTML = "";
+  for (const n of allNames()) {
+    const chip = document.createElement("button");
+    chip.className = "name-chip" + (n === lastName ? " active" : "");
+    chip.textContent = n;
+    chip.addEventListener("click", () => {
+      nameInputEl.value = n;
+      for (const c of nameChipsEl.children) c.classList.toggle("active", c === chip);
+    });
+    nameChipsEl.appendChild(chip);
+  }
+  nameInputEl.value = lastName;
+  saveModal.classList.remove("hidden");
+});
+document.getElementById("save-cancel").addEventListener("click", () => saveModal.classList.add("hidden"));
+document.getElementById("save-confirm").addEventListener("click", () => {
+  const name = nameInputEl.value.trim();
+  if (!name) { nameInputEl.focus(); nameInputEl.style.borderColor = "#F03E3E"; return; }
+  nameInputEl.style.borderColor = "";
+  const pic = PICTURES.find(p => p.id === currentPic);
+  const entry = {
+    id: Date.now() + "" + Math.floor(Math.random() * 1000),
+    name,
+    date: new Date().toISOString().slice(0, 10),
+    picLabel: pic.label,
+  };
+  if (pic.type === "raster") {
+    entry.type = "raster";
+    entry.orig = pic.origURL;
+    entry.cur = pic.canvas.toDataURL("image/png");
+  } else {
+    entry.type = "svg";
+    entry.picId = pic.id;
+    entry.fills = Object.assign({}, savedFills[pic.id] || {});
+  }
+  galleryEntries.unshift(entry);
+  lastName = name;
+  storeSet("gallery", galleryEntries);
+  storeSet("lastName", lastName);
+  saveModal.classList.add("hidden");
+  brushLabelEl.textContent = name + "의 작품 저장 완료! 🎉";
+  brushLabelEl.classList.remove("flash");
+  void brushLabelEl.offsetWidth;
+  brushLabelEl.classList.add("flash");
+});
+
+function svgThumb(entry) {
+  const def = PICTURES.find(p => p.id === entry.picId);
+  const div = document.createElement("div");
+  div.className = "gallery-thumb";
+  if (!def) { div.textContent = "🎨"; return div; }
+  div.innerHTML = '<svg viewBox="' + def.viewBox + '" xmlns="http://www.w3.org/2000/svg">' + def.svg + '</svg>';
+  for (const el of div.querySelectorAll("[data-fill]")) {
+    const f = entry.fills[el.getAttribute("data-fill")];
+    if (f) el.setAttribute("fill", f);
+  }
+  return div;
+}
+
+function renderGallery() {
+  // 이름 필터 칩
+  galleryFilterEl.innerHTML = "";
+  const names = [...new Set(galleryEntries.map(e => e.name))];
+  if (names.length > 1) {
+    const all = document.createElement("button");
+    all.className = "name-chip" + (galleryFilter === null ? " active" : "");
+    all.textContent = "모두";
+    all.addEventListener("click", () => { galleryFilter = null; renderGallery(); });
+    galleryFilterEl.appendChild(all);
+    for (const n of names) {
+      const chip = document.createElement("button");
+      chip.className = "name-chip" + (galleryFilter === n ? " active" : "");
+      chip.textContent = n;
+      chip.addEventListener("click", () => { galleryFilter = n; renderGallery(); });
+      galleryFilterEl.appendChild(chip);
+    }
+  }
+  // 목록
+  galleryListEl.innerHTML = "";
+  const entries = galleryEntries.filter(e => !galleryFilter || e.name === galleryFilter);
+  if (entries.length === 0) {
+    galleryListEl.innerHTML = '<div style="font-family:\'Jua\',sans-serif;color:#ADB5BD;text-align:center;padding:24px 0;">아직 저장한 그림이 없어! 💾 버튼으로 저장해봐</div>';
+    return;
+  }
+  for (const entry of entries) {
+    const item = document.createElement("div");
+    item.className = "gallery-item";
+    if (entry.type === "raster") {
+      const th = document.createElement("div");
+      th.className = "gallery-thumb";
+      const img = document.createElement("img");
+      img.src = entry.cur;
+      th.appendChild(img);
+      item.appendChild(th);
+    } else {
+      item.appendChild(svgThumb(entry));
+    }
+    const info = document.createElement("div");
+    info.className = "gallery-info";
+    info.innerHTML = '<div class="who">' + entry.name + '</div><div class="what">' + entry.picLabel + " · " + entry.date + "</div>";
+    item.appendChild(info);
+    const del = document.createElement("button");
+    del.className = "gallery-del";
+    del.textContent = "✕";
+    del.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (!confirm(entry.name + "의 작품을 지울까?")) return;
+      galleryEntries = galleryEntries.filter(x => x.id !== entry.id);
+      storeSet("gallery", galleryEntries);
+      renderGallery();
+    });
+    item.appendChild(del);
+    item.addEventListener("click", () => loadEntry(entry));
+    galleryListEl.appendChild(item);
+  }
+}
+
+function loadEntry(entry) {
+  galleryModal.classList.add("hidden");
+  if (entry.type === "svg") {
+    savedFills[entry.picId] = Object.assign({}, entry.fills);
+    currentPic = entry.picId;
+    scheduleSave("svg", saveSvgFills);
+    rebuildPicTabs();
+    showPicture();
+    return;
+  }
+  // raster: 같은 원본 그림이 이미 열려 있으면 그 위에 복원, 없으면 새로 추가
+  const applyCur = (pic) => {
+    const img = new Image();
+    img.onload = () => {
+      pic.ctx.putImageData(pic.original, 0, 0);
+      pic.ctx.drawImage(img, 0, 0, pic.canvas.width, pic.canvas.height);
+      scheduleSave("pics", saveCustomPics);
+    };
+    img.src = entry.cur;
+  };
+  const existing = PICTURES.find(p => p.type === "raster" && p.origURL === entry.orig);
+  if (existing) {
+    applyCur(existing);
+    currentPic = existing.id;
+    rebuildPicTabs();
+    showPicture();
+  } else {
+    const img = new Image();
+    img.onload = () => {
+      const pic = makeRasterPicture(img, entry.picLabel);
+      pic.origURL = entry.orig;
+      PICTURES.push(pic);
+      applyCur(pic);
+      currentPic = pic.id;
+      rebuildPicTabs();
+      showPicture();
+      scheduleSave("pics", saveCustomPics);
+    };
+    img.src = entry.orig;
+  }
+}
+
+document.getElementById("gallery-btn").addEventListener("click", () => {
+  galleryFilter = null;
+  renderGallery();
+  galleryModal.classList.remove("hidden");
+});
+document.getElementById("gallery-close").addEventListener("click", () => galleryModal.classList.add("hidden"));
+galleryModal.addEventListener("click", (e) => { if (e.target === galleryModal) galleryModal.classList.add("hidden"); });
+saveModal.addEventListener("click", (e) => { if (e.target === saveModal) saveModal.classList.add("hidden"); });
 
 /* ── 확대 / 축소 / 이동 ── */
 let zoom = 1, panX = 0, panY = 0;
