@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>🎨 알록달록 색깔 놀이</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="색깔놀이">
+<meta name="theme-color" content="#FFF9DB">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0; min-height: 100vh;
+    background: linear-gradient(160deg, #FFF9DB 0%, #FFF0F6 55%, #E7F5FF 100%);
+    font-family: 'Jua', sans-serif; color: #343A40;
+    padding: 24px 14px 60px;
+  }
+  h1 { text-align: center; font-size: clamp(26px, 7vw, 42px); margin: 0 0 4px; font-weight: normal; }
+  .subtitle { text-align: center; font-size: 17px; color: #868E96; margin: 0 0 20px; }
+  .tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+  .tab {
+    font-family: 'Jua', sans-serif; font-size: 17px; padding: 9px 16px; border-radius: 999px;
+    border: 3px solid transparent; background: rgba(255,255,255,0.5); color: #343A40; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab.active { border-color: #343A40; background: #FFF; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+  .wrap { max-width: 580px; margin: 0 auto; }
+  .bowl {
+    width: 175px; height: 175px; margin: 0 auto; border-radius: 50%;
+    background: repeating-conic-gradient(#F1F3F5 0deg 20deg, #E9ECEF 20deg 40deg);
+    border: 10px solid #FFF;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15), inset 0 4px 12px rgba(0,0,0,0.1);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.4s ease; font-size: 48px;
+  }
+  .bowl.wobble { animation: wobble 0.5s ease; }
+  @keyframes wobble { 0%{transform:scale(1)} 35%{transform:scale(1.06) rotate(-2deg)} 70%{transform:scale(0.98) rotate(2deg)} 100%{transform:scale(1)} }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+  .result-name { text-align: center; font-size: 28px; margin-top: 14px; min-height: 40px; }
+  .result-eng { text-align: center; font-size: 18px; color: #845EF7; min-height: 24px; }
+  .recipe { text-align: center; font-size: 16px; color: #868E96; min-height: 24px; }
+  .gauge { display: flex; gap: 4px; justify-content: center; margin-top: 10px; height: 22px; }
+  .gauge-drop {
+    width: 13px; height: 18px; border-radius: 50% 50% 50% 10%; transform: rotate(45deg);
+    background: #E9ECEF; border: 1.5px solid rgba(0,0,0,0.06); transition: background 0.2s;
+  }
+  .full-msg { text-align: center; font-size: 15px; color: #F76707; margin-top: 6px; min-height: 20px; }
+  .palette { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; margin-top: 22px; padding: 0 4px; }
+  .paint {
+    width: 62px; height: 62px; border-radius: 50% 50% 50% 12%; transform: rotate(45deg);
+    border: 3px solid rgba(0,0,0,0.08); cursor: pointer; position: relative; flex-shrink: 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12); transition: all 0.2s cubic-bezier(.34,1.56,.64,1);
+    padding: 0;
+  }
+  .paint:disabled { opacity: 0.4; cursor: not-allowed; }
+  .paint span.label {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    transform: rotate(-45deg); font-family: 'Jua', sans-serif; font-size: 14px; user-select: none;
+  }
+  .paint .badge {
+    position: absolute; top: -10px; right: -10px; transform: rotate(-45deg);
+    background: #343A40; color: #FFF; border-radius: 999px; min-width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Jua', sans-serif; font-size: 14px; border: 2px solid #FFF;
+  }
+  .paint.small { width: 46px; height: 46px; }
+  .paint.small span.label { font-size: 11px; }
+  .paint.small .badge { min-width: 20px; height: 20px; font-size: 12px; top: -8px; right: -8px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 20px; }
+  .chip {
+    font-family: 'Jua', sans-serif; font-size: 15px; padding: 7px 13px; border-radius: 999px;
+    border: 2px solid #DEE2E6; background: #FFF; color: #495057; cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .chip .dot { width: 15px; height: 15px; border-radius: 50%; border: 1.5px solid rgba(0,0,0,0.1); }
+  .clear-btn {
+    font-family: 'Jua', sans-serif; font-size: 15px; padding: 7px 15px; border-radius: 999px;
+    border: none; background: #495057; color: #FFF; cursor: pointer;
+  }
+  /* 퀴즈 */
+  .score { text-align: center; font-size: 18px; color: #868E96; margin-bottom: 12px; }
+  .question { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .q-part { text-align: center; }
+  .q-drops { display: flex; gap: 4px; justify-content: center; }
+  .q-drop { width: 28px; height: 28px; border-radius: 50% 50% 50% 10%; transform: rotate(45deg); border: 2px solid rgba(0,0,0,0.08); }
+  .q-label { font-size: 15px; margin-top: 8px; color: #495057; }
+  .q-op { font-size: 34px; color: #ADB5BD; }
+  .q-answer {
+    width: 60px; height: 60px; border-radius: 50%; background: #F1F3F5;
+    border: 3px solid rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center;
+    font-size: 30px; color: #ADB5BD; transition: background 0.3s;
+  }
+  .feedback { text-align: center; font-size: 24px; margin: 18px 0; min-height: 36px; }
+  .options { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .opt {
+    width: 100px; padding: 12px 8px; border-radius: 20px; border: 3px solid #E9ECEF;
+    background: #FFF; cursor: pointer; transition: all 0.2s; font-family: 'Jua', sans-serif;
+  }
+  .opt .swatch { width: 48px; height: 48px; border-radius: 50%; margin: 0 auto 8px; border: 2px solid rgba(0,0,0,0.08); }
+  .opt .opt-name { font-size: 17px; color: #343A40; }
+  .opt.correct { border-color: #37B24D; }
+  .opt.wrong { border-color: #F03E3E; animation: shake 0.4s; }
+  .opt.faded { opacity: 0.45; }
+  .next-btn {
+    display: block; margin: 24px auto 0; font-family: 'Jua', sans-serif; font-size: 20px;
+    padding: 12px 30px; border-radius: 999px; border: none; background: #F76707; color: #FFF;
+    cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+  }
+  /* 색칠하기 */
+  .pic-tabs { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .pic-tab {
+    font-family: 'Jua', sans-serif; font-size: 16px; padding: 7px 13px; border-radius: 999px;
+    border: 2.5px solid transparent; background: rgba(255,255,255,0.55); cursor: pointer; color: #343A40;
+  }
+  .pic-tab.active { border-color: #343A40; background: #FFF; }
+  .pic-tab.add { border: 2.5px dashed #ADB5BD; color: #868E96; }
+  .canvas-card {
+    background: #FFF; border-radius: 24px; padding: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1); margin-bottom: 10px;
+  }
+  .canvas-viewport { overflow: hidden; border-radius: 16px; position: relative; }
+  .canvas-inner { transform-origin: 0 0; }
+  .canvas-inner svg, .canvas-inner canvas { display: block; width: 100%; height: auto; }
+  .canvas-inner svg [data-fill] { cursor: pointer; transition: fill 0.25s ease; }
+  .brush-bar {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    flex-wrap: wrap; margin-bottom: 6px;
+  }
+  .brush-swatch {
+    width: 42px; height: 42px; border-radius: 50%; border: 3px solid #FFF;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18); background:
+      repeating-conic-gradient(#F1F3F5 0deg 20deg, #E9ECEF 20deg 40deg);
+    transition: background 0.3s;
+  }
+  .brush-label { font-size: 19px; min-width: 120px; }
+  .brush-label.flash { color: #F76707; animation: shake 0.4s; }
+  .tool-btn {
+    font-family: 'Jua', sans-serif; font-size: 15px; padding: 7px 14px; border-radius: 999px;
+    border: 2.5px solid #DEE2E6; background: #FFF; color: #495057; cursor: pointer;
+  }
+  .tool-btn.active { border-color: #343A40; background: #FFF3BF; }
+  .mini-recipe { text-align: center; font-size: 14px; color: #868E96; min-height: 20px; margin-bottom: 4px; }
+  .palette.mini { gap: 13px; margin-top: 10px; }
+  .hidden { display: none; }
+  button:focus-visible { outline: 3px solid #4C6EF5; outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+
+<h1>🎨 알록달록 색깔 놀이</h1>
+<p class="subtitle">색을 섞고, 맞히고, 색칠해봐!</p>
+
+<div class="tabs">
+  <button class="tab active" id="tab-free">🖌️ 섞어보기</button>
+  <button class="tab" id="tab-quiz">❓ 맞혀보기</button>
+  <button class="tab" id="tab-color">🖍️ 색칠하기</button>
+</div>
+
+<div class="wrap">
+  <!-- 섞어보기 -->
+  <div id="free-mode">
+    <div class="bowl" id="bowl">🎨</div>
+    <div class="result-name" id="result-name">물감을 톡톡 눌러봐!</div>
+    <div class="result-eng" id="result-eng"></div>
+    <div class="recipe" id="recipe"></div>
+    <div class="gauge" id="gauge"></div>
+    <div class="full-msg" id="full-msg"></div>
+    <div class="palette" id="palette"></div>
+    <div class="controls" id="controls"></div>
+  </div>
+
+  <!-- 맞혀보기 -->
+  <div id="quiz-mode" class="hidden">
+    <div class="score" id="score">⭐ 맞힌 개수: 0개</div>
+    <div class="question" id="question"></div>
+    <div class="feedback" id="feedback">무슨 색이 나올까?</div>
+    <div class="options" id="options"></div>
+    <button class="next-btn hidden" id="next-btn">다음 문제 👉</button>
+  </div>
+
+  <!-- 색칠하기 -->
+  <div id="color-mode" class="hidden">
+    <div class="pic-tabs" id="pic-tabs"></div>
+    <div class="canvas-card">
+      <div class="canvas-viewport" id="canvas-viewport">
+        <div class="canvas-inner" id="canvas-inner"></div>
+      </div>
+    </div>
+    <div class="controls" id="zoom-bar" style="margin:0 0 8px;">
+      <button class="tool-btn" id="zoom-out">🔍 ➖</button>
+      <button class="tool-btn" id="zoom-level" style="min-width:74px;">100%</button>
+      <button class="tool-btn" id="zoom-in">🔍 ➕</button>
+    </div>
+    <div class="controls" id="pic-extra" style="margin:0 0 6px;"></div>
+    <div style="text-align:center;font-size:13px;color:#ADB5BD;margin-bottom:8px;">✨ 그림과 색칠한 내용은 이 기기에 자동 저장돼요</div>
+    <input type="file" id="pic-file" accept="image/*" style="display:none">
+    <div class="brush-bar">
+      <div class="brush-swatch" id="brush-swatch"></div>
+      <div class="brush-label" id="brush-label">아래에서 색을 섞어봐!</div>
+      <button class="tool-btn" id="eraser-btn">🧽 지우개</button>
+      <button class="tool-btn" id="wipe-btn">🗑️ 다 지우기</button>
+    </div>
+    <div class="mini-recipe" id="mini-recipe"></div>
+    <div class="palette mini" id="mini-palette"></div>
+    <div class="controls" id="mini-controls"></div>
+  </div>
+</div>
+
+<script>
+/* ═══════ 물감 섞기 엔진 ═══════ */
+function rybToRgb(r, y, b) {
+  const C = { w:[1,1,1], r:[1,0,0], y:[1,1,0], b:[0.163,0.373,0.6], o:[1,0.5,0], g:[0,0.66,0.2], p:[0.5,0,0.5], k:[0.2,0.094,0] };
+  const out = [0,0,0];
+  for (let i = 0; i < 3; i++) {
+    out[i] = C.w[i]*(1-r)*(1-y)*(1-b) + C.r[i]*r*(1-y)*(1-b) + C.y[i]*(1-r)*y*(1-b) + C.b[i]*(1-r)*(1-y)*b
+           + C.o[i]*r*y*(1-b) + C.p[i]*r*(1-y)*b + C.g[i]*(1-r)*y*b + C.k[i]*r*y*b;
+  }
+  return out;
+}
+
+const PAINTS = [
+  { id:"red",    name:"빨강", hex:"#E03131", ryb:[1,0,0],       dark:0, lightText:false },
+  { id:"orange", name:"주황", hex:"#FD7E14", ryb:[0.5,0.5,0],   dark:0, lightText:false },
+  { id:"yellow", name:"노랑", hex:"#FFD43B", ryb:[0,1,0],       dark:0, lightText:true },
+  { id:"green",  name:"초록", hex:"#37B24D", ryb:[0,0.55,0.55], dark:0, lightText:false },
+  { id:"sky",    name:"하늘", hex:"#74C0FC", ryb:[0,0,0.35],    dark:0, lightText:true },
+  { id:"blue",   name:"파랑", hex:"#3B82F6", ryb:[0,0,1],       dark:0, lightText:false },
+  { id:"purple", name:"보라", hex:"#9C36B5", ryb:[0.55,0,0.55], dark:0, lightText:false },
+  { id:"pink",   name:"분홍", hex:"#FAA2C1", ryb:[0.3,0,0.03],  dark:0, lightText:true },
+  { id:"white",  name:"하양", hex:"#FFFFFF", ryb:[0,0,0],       dark:0, lightText:true },
+  { id:"black",  name:"검정", hex:"#212529", ryb:[0,0,0],       dark:1, lightText:false },
+];
+
+const NAMED = [
+  ["하양","#FFFFFF"],["검정","#212529"],["회색","#989DA3"],["진회색","#5A5F66"],
+  ["빨강","#E03131"],["주황","#FD7E14"],["귤색","#FFA94D"],["살구색","#FFCBA8"],
+  ["노랑","#FFD43B"],["크림색","#FFF3BF"],["연두","#94D82D"],["초록","#37B24D"],
+  ["진초록","#1E5631"],["청록","#0CA678"],["민트색","#96E6C8"],["하늘색","#74C0FC"],
+  ["파랑","#3B82F6"],["남색","#22417F"],["보라","#9C36B5"],["연보라","#C9A6E8"],
+  ["자주색","#A61E4D"],["진분홍","#F06595"],["분홍","#FAA2C1"],["갈색","#7F5539"],
+  ["고동색","#4E342E"],["카키색","#8A7D3A"]
+].map(([name,hex]) => ({name,hex}));
+
+const ENGLISH_NAMES = [
+  ["Coral","#FF7F50"],["Salmon","#FA8072"],["Peach","#FFCBA4"],["Gold","#EAC117"],
+  ["Mustard","#D4A017"],["Lime","#9ACD32"],["Olive","#808000"],["Emerald","#2ECC71"],
+  ["Forest Green","#228B22"],["Teal","#008080"],["Turquoise","#40E0D0"],["Mint","#98E8C1"],
+  ["Sky Blue","#87CEEB"],["Navy","#1F3A93"],["Indigo","#4B0082"],["Lavender","#C8A2E8"],
+  ["Violet","#8A2BE2"],["Plum","#8E4585"],["Magenta","#D0417E"],["Hot Pink","#FF69B4"],
+  ["Rose","#E8909C"],["Maroon","#800000"],["Brick","#B22222"],["Chocolate","#7B3F00"],
+  ["Tan","#D2B48C"],["Beige","#E8DCC0"],["Ivory","#FFFFF0"],["Charcoal","#36454F"],["Slate","#708090"]
+].map(([name,hex]) => ({name,hex}));
+
+function hexToRgb01(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  return [((n>>16)&255)/255, ((n>>8)&255)/255, (n&255)/255];
+}
+function rgb01ToHex(rgb) {
+  return "#" + rgb.map(v => Math.round(Math.min(1, Math.max(0, v)) * 255).toString(16).padStart(2, "0")).join("");
+}
+function colorDist(a, b) {
+  return 2*(a[0]-b[0])**2 + 4*(a[1]-b[1])**2 + 3*(a[2]-b[2])**2;
+}
+
+const LATENT_PURE = {};
+for (const p of PAINTS) {
+  let rgb = rybToRgb(...p.ryb);
+  const d = 0.85 * p.dark;
+  rgb = rgb.map(v => v*(1-d) + 0.06*d);
+  LATENT_PURE[p.id] = rgb;
+}
+
+const NAME_THRESHOLD = 0.022;
+
+function rgbToHsl([r, g, b]) {
+  const max = Math.max(r,g,b), min = Math.min(r,g,b), l = (max+min)/2;
+  if (max === min) return [0, 0, l];
+  const d = max - min;
+  const s = l > 0.5 ? d/(2-max-min) : d/(max+min);
+  let h;
+  if (max === r) h = ((g-b)/d + (g < b ? 6 : 0)) * 60;
+  else if (max === g) h = ((b-r)/d + 2) * 60;
+  else h = ((r-g)/d + 4) * 60;
+  return [h, s, l];
+}
+
+function describeColor(rgb) {
+  const [h, s, l] = rgbToHsl(rgb);
+  if (l > 0.94 && s < 0.25) return "거의 하양";
+  if (l < 0.1) return "거의 검정";
+  if (s < 0.12) {
+    if (l > 0.65) return "밝은 회색";
+    if (l < 0.35) return "어두운 회색";
+    return "회색";
+  }
+  let hue;
+  if (h < 8 || h >= 345) hue = l > 0.72 ? "분홍" : "빨강";
+  else if (h < 22) hue = l > 0.72 ? "분홍" : l < 0.4 ? "갈색" : "다홍";
+  else if (h < 35) hue = l < 0.4 ? "갈색" : "주황";
+  else if (h < 68) hue = l < 0.42 ? "갈색" : (s < 0.55 && l < 0.65) ? "카키색" : (h < 50 ? "주황" : "노랑");
+  else if (h < 100) hue = "연두";
+  else if (h < 150) hue = "초록";
+  else if (h < 195) hue = "청록";
+  else if (h < 230) hue = l > 0.7 ? "하늘색" : "파랑";
+  else if (h < 260) hue = l < 0.35 ? "남색" : "파랑";
+  else if (h < 300) hue = "보라";
+  else if (h < 335) hue = l > 0.65 ? "분홍" : "자주색";
+  else hue = "분홍";
+  let mod = "";
+  if (l > 0.78) mod = "연한 ";
+  else if (l < 0.28) mod = "어두운 ";
+  else if (s < 0.35) mod = "흐린 ";
+  else if (s > 0.75 && l > 0.42 && l < 0.62) mod = "진한 ";
+  return mod + hue;
+}
+
+function mixDrops(drops) {
+  const used = PAINTS.filter(p => drops[p.id] > 0);
+  const total = used.reduce((a, p) => a + drops[p.id], 0);
+  if (total === 0) return null;
+  if (used.length === 1) return { hex: used[0].hex, name: used[0].name, english: null, exact: true };
+
+  let ryb = [0,0,0], dark = 0;
+  for (const p of used) {
+    const w = drops[p.id] / total;
+    ryb = ryb.map((v, i) => v + p.ryb[i] * w);
+    dark += p.dark * w;
+  }
+  let rgb = rybToRgb(...ryb);
+  const d = 0.85 * dark;
+  rgb = rgb.map(v => v*(1-d) + 0.06*d);
+  for (const p of used) {
+    const w = drops[p.id] / total;
+    const actual = hexToRgb01(p.hex);
+    for (let i = 0; i < 3; i++) rgb[i] += w * (actual[i] - LATENT_PURE[p.id][i]);
+  }
+  rgb = rgb.map(v => Math.min(1, Math.max(0, v)));
+
+  let best = null, bestD = Infinity;
+  for (const c of NAMED) {
+    const dist = colorDist(rgb, hexToRgb01(c.hex));
+    if (dist < bestD) { bestD = dist; best = c; }
+  }
+  const exact = bestD < NAME_THRESHOLD;
+  const name = exact ? best.name : describeColor(rgb);
+
+  let english = null, engD = Infinity;
+  for (const c of ENGLISH_NAMES) {
+    const dist = colorDist(rgb, hexToRgb01(c.hex));
+    if (dist < engD) { engD = dist; english = c; }
+  }
+  english = engD < 0.038 ? english.name : null;
+
+  return { hex: rgb01ToHex(rgb), name, english, exact };
+}
+
+/* 팔레트 버튼 만들기 (공용) */
+function buildPalette(container, small, onTap) {
+  for (const p of PAINTS) {
+    const btn = document.createElement("button");
+    btn.className = "paint" + (small ? " small" : "");
+    btn.style.background = p.hex;
+    if (p.id === "white") btn.style.borderColor = "#DEE2E6";
+    btn.setAttribute("aria-label", p.name + " 한 방울 넣기");
+    const label = document.createElement("span");
+    label.className = "label";
+    label.textContent = p.name;
+    label.style.color = p.lightText ? "#495057" : "#FFF";
+    btn.appendChild(label);
+    const badge = document.createElement("span");
+    badge.className = "badge";
+    badge.style.display = "none";
+    btn.appendChild(badge);
+    btn.addEventListener("click", () => onTap(p.id));
+    btn._paint = p;
+    btn._badge = badge;
+    container.appendChild(btn);
+  }
+}
+function updatePaletteBadges(container, drops, maxed) {
+  for (const btn of container.children) {
+    const c = drops[btn._paint.id] || 0;
+    btn._badge.style.display = c > 0 ? "flex" : "none";
+    btn._badge.textContent = c;
+    btn.disabled = maxed;
+    btn.style.boxShadow = c > 0
+      ? "0 0 0 4px #FFF, 0 0 0 7px " + btn._paint.hex + "66, 0 6px 12px rgba(0,0,0,0.15)"
+      : "0 4px 8px rgba(0,0,0,0.12)";
+  }
+}
+
+/* ═══════ 섞어보기 화면 ═══════ */
+const MAX_DROPS = 10;
+let drops = {};
+
+const bowlEl = document.getElementById("bowl");
+const nameEl = document.getElementById("result-name");
+const engEl = document.getElementById("result-eng");
+const recipeEl = document.getElementById("recipe");
+const gaugeEl = document.getElementById("gauge");
+const fullEl = document.getElementById("full-msg");
+const paletteEl = document.getElementById("palette");
+const controlsEl = document.getElementById("controls");
+
+for (let i = 0; i < MAX_DROPS; i++) {
+  const g = document.createElement("div");
+  g.className = "gauge-drop";
+  gaugeEl.appendChild(g);
+}
+buildPalette(paletteEl, false, addDrop);
+
+function addDrop(id) {
+  const total = Object.values(drops).reduce((a, b) => a + b, 0);
+  if (total >= MAX_DROPS) return;
+  drops[id] = (drops[id] || 0) + 1;
+  bowlEl.classList.remove("wobble");
+  void bowlEl.offsetWidth;
+  bowlEl.classList.add("wobble");
+  render();
+}
+function removeDrop(id) {
+  drops[id]--;
+  if (drops[id] <= 0) delete drops[id];
+  render();
+}
+function clearDrops() { drops = {}; render(); }
+
+function render() {
+  const used = PAINTS.filter(p => drops[p.id] > 0);
+  const total = used.reduce((a, p) => a + drops[p.id], 0);
+  const result = mixDrops(drops);
+
+  if (result) {
+    bowlEl.style.background = result.hex;
+    bowlEl.textContent = "";
+    nameEl.textContent = result.name + "!";
+    engEl.textContent = result.english ? "영어로는 " + result.english + "!" : "";
+  } else {
+    bowlEl.style.background = "repeating-conic-gradient(#F1F3F5 0deg 20deg, #E9ECEF 20deg 40deg)";
+    bowlEl.textContent = "🎨";
+    nameEl.textContent = "물감을 톡톡 눌러봐!";
+    engEl.textContent = "";
+  }
+  recipeEl.textContent = used.map(p => p.name + " " + drops[p.id] + "방울").join(" + ");
+  fullEl.textContent = total >= MAX_DROPS ? "그릇이 가득 찼어! 비우고 다시 해보자 😆" : "";
+
+  const gaugeDrops = gaugeEl.children;
+  for (let i = 0; i < MAX_DROPS; i++) {
+    let color = "#E9ECEF", border = "1.5px solid rgba(0,0,0,0.06)";
+    let j = i;
+    for (const p of used) {
+      if (j < drops[p.id]) { color = p.hex; if (p.id === "white") border = "1.5px solid #DEE2E6"; break; }
+      j -= drops[p.id];
+    }
+    gaugeDrops[i].style.background = color;
+    gaugeDrops[i].style.border = border;
+  }
+  updatePaletteBadges(paletteEl, drops, total >= MAX_DROPS);
+
+  controlsEl.innerHTML = "";
+  if (used.length > 0) {
+    for (const p of used) {
+      const chip = document.createElement("button");
+      chip.className = "chip";
+      const dot = document.createElement("span");
+      dot.className = "dot";
+      dot.style.background = p.hex;
+      chip.appendChild(dot);
+      chip.appendChild(document.createTextNode(p.name + " 한 방울 빼기 ➖"));
+      chip.addEventListener("click", () => removeDrop(p.id));
+      controlsEl.appendChild(chip);
+    }
+    const clearBtn = document.createElement("button");
+    clearBtn.className = "clear-btn";
+    clearBtn.textContent = "🧼 그릇 비우기";
+    clearBtn.addEventListener("click", clearDrops);
+    controlsEl.appendChild(clearBtn);
+  }
+}
+render();
+
+/* ═══════ 맞혀보기(퀴즈) 화면 ═══════ */
+const QUIZ_BANK = [
+  {red:1,yellow:1},{blue:1,yellow:1},{red:1,blue:1},{red:1,white:2},{blue:1,white:2},
+  {white:1,black:1},{yellow:2,blue:1},{yellow:1,blue:2},{red:2,yellow:1},{red:1,yellow:2},
+  {green:1,red:1},{green:1,yellow:1},{green:1,blue:1},{blue:1,black:1},{yellow:2,black:1},
+  {purple:1,white:2},{red:2,white:1},{green:1,white:2}
+];
+let quiz = null, chosen = null, score = 0, streak = 0;
+
+const scoreEl = document.getElementById("score");
+const questionEl = document.getElementById("question");
+const feedbackEl = document.getElementById("feedback");
+const optionsEl = document.getElementById("options");
+const nextBtn = document.getElementById("next-btn");
+
+function makeQuestion() {
+  for (let tries = 0; tries < 40; tries++) {
+    const recipe = QUIZ_BANK[Math.floor(Math.random() * QUIZ_BANK.length)];
+    const answer = mixDrops(recipe);
+    if (!answer.name) continue;
+    const answerRgb = hexToRgb01(answer.hex);
+    const wrongs = NAMED
+      .filter(c => c.name !== answer.name && colorDist(hexToRgb01(c.hex), answerRgb) > 0.15)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 2);
+    if (wrongs.length < 2) continue;
+    const options = [{name: answer.name, hex: answer.hex}, ...wrongs].sort(() => Math.random() - 0.5);
+    return { recipe, answer, options };
+  }
+  const answer = mixDrops({red:1, yellow:1});
+  return {
+    recipe: {red:1, yellow:1}, answer,
+    options: [{name: answer.name, hex: answer.hex},
+              NAMED.find(c => c.name === "파랑"), NAMED.find(c => c.name === "분홍")]
+  };
+}
+
+function renderQuiz() {
+  scoreEl.textContent = "⭐ 맞힌 개수: " + score + "개" + (streak >= 3 ? " 🔥 " + streak + "연속!" : "");
+
+  questionEl.innerHTML = "";
+  const parts = Object.entries(quiz.recipe);
+  parts.forEach(([id, n], pi) => {
+    if (pi > 0) {
+      const op = document.createElement("span");
+      op.className = "q-op";
+      op.textContent = "+";
+      questionEl.appendChild(op);
+    }
+    const paint = PAINTS.find(p => p.id === id);
+    const part = document.createElement("div");
+    part.className = "q-part";
+    const dropsRow = document.createElement("div");
+    dropsRow.className = "q-drops";
+    for (let i = 0; i < n; i++) {
+      const dEl = document.createElement("div");
+      dEl.className = "q-drop";
+      dEl.style.background = paint.hex;
+      if (paint.id === "white") dEl.style.borderColor = "#DEE2E6";
+      dropsRow.appendChild(dEl);
+    }
+    part.appendChild(dropsRow);
+    const lbl = document.createElement("div");
+    lbl.className = "q-label";
+    lbl.textContent = paint.name + " " + n + "방울";
+    part.appendChild(lbl);
+    questionEl.appendChild(part);
+  });
+  const eq = document.createElement("span");
+  eq.className = "q-op";
+  eq.textContent = "=";
+  questionEl.appendChild(eq);
+  const ans = document.createElement("div");
+  ans.className = "q-answer";
+  const isCorrect = chosen && chosen.name === quiz.answer.name;
+  if (isCorrect) { ans.style.background = quiz.answer.hex; ans.textContent = ""; }
+  else ans.textContent = "?";
+  questionEl.appendChild(ans);
+
+  if (!chosen) feedbackEl.textContent = "무슨 색이 나올까?";
+  else if (isCorrect) feedbackEl.textContent = "딩동댕~! " + quiz.answer.name + "이 맞았어!";
+  else feedbackEl.textContent = "아쉬워! 정답은 " + quiz.answer.name + "이야";
+
+  optionsEl.innerHTML = "";
+  for (const opt of quiz.options) {
+    const btn = document.createElement("button");
+    btn.className = "opt";
+    const isAnswer = opt.name === quiz.answer.name;
+    const isChosen = chosen && chosen.name === opt.name;
+    if (chosen) {
+      if (isAnswer) btn.classList.add("correct");
+      else if (isChosen) btn.classList.add("wrong");
+      else btn.classList.add("faded");
+    }
+    const sw = document.createElement("div");
+    sw.className = "swatch";
+    sw.style.background = opt.hex;
+    btn.appendChild(sw);
+    const nm = document.createElement("div");
+    nm.className = "opt-name";
+    nm.textContent = opt.name;
+    btn.appendChild(nm);
+    btn.addEventListener("click", () => {
+      if (chosen) return;
+      chosen = opt;
+      if (opt.name === quiz.answer.name) { score++; streak++; }
+      else streak = 0;
+      renderQuiz();
+      nextBtn.classList.remove("hidden");
+    });
+    optionsEl.appendChild(btn);
+  }
+}
+
+nextBtn.addEventListener("click", () => {
+  chosen = null;
+  quiz = makeQuestion();
+  nextBtn.classList.add("hidden");
+  renderQuiz();
+});
+
+/* ═══════ 색칠하기 화면 ═══════ */
+const S = 'fill="#FFFFFF" stroke="#343A40" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"';
+const LINE = 'fill="none" stroke="#343A40" stroke-width="3.5" stroke-linecap="round" style="pointer-events:none"';
+
+const PICTURES = [
+  { id: "car", label: "🚗 자동차", viewBox: "0 0 400 240", svg: `
+    <path data-fill="body" d="M32,168 Q30,118 62,113 L338,113 Q370,118 368,168 Q368,180 352,180 L48,180 Q32,180 32,168 Z" ${S}/>
+    <path data-fill="cabin" d="M138,113 L158,60 Q161,52 171,52 L242,52 Q252,52 255,60 L276,113 Z" ${S}/>
+    <path data-fill="win1" d="M163,105 L176,64 L200,64 L200,105 Z" ${S}/>
+    <path data-fill="win2" d="M212,105 L212,64 L238,64 L250,105 Z" ${S}/>
+    <ellipse data-fill="light" cx="352" cy="140" rx="11" ry="9" ${S}/>
+    <circle data-fill="wheel1" cx="112" cy="180" r="30" ${S}/>
+    <circle data-fill="hub1" cx="112" cy="180" r="13" ${S}/>
+    <circle data-fill="wheel2" cx="288" cy="180" r="30" ${S}/>
+    <circle data-fill="hub2" cx="288" cy="180" r="13" ${S}/>` },
+  { id: "house", label: "🏠 집", viewBox: "0 0 400 300", svg: `
+    <rect data-fill="chimney" x="262" y="66" width="32" height="52" ${S}/>
+    <rect data-fill="wall" x="92" y="142" width="216" height="118" ${S}/>
+    <path data-fill="roof" d="M62,142 L200,44 L338,142 Z" ${S}/>
+    <path data-fill="door" d="M176,260 L176,208 Q176,192 200,192 Q224,192 224,208 L224,260 Z" ${S}/>
+    <rect data-fill="win1" x="116" y="168" width="44" height="44" ${S}/>
+    <rect data-fill="win2" x="240" y="168" width="44" height="44" ${S}/>
+    <path ${LINE} d="M138,168 L138,212 M116,190 L160,190 M262,168 L262,212 M240,190 L284,190"/>` },
+  { id: "fish", label: "🐠 물고기", viewBox: "0 0 400 260", svg: `
+    <path data-fill="tail" d="M278,130 L352,78 Q362,130 352,182 Z" ${S}/>
+    <path data-fill="topfin" d="M150,66 Q180,18 232,44 Q200,60 188,78 Z" ${S}/>
+    <path data-fill="botfin" d="M155,196 Q182,240 226,216 Q198,200 188,186 Z" ${S}/>
+    <ellipse data-fill="bodyf" cx="180" cy="130" rx="112" ry="72" ${S}/>
+    <path ${LINE} d="M136,78 Q114,130 136,182"/>
+    <circle data-fill="eye" cx="112" cy="108" r="11" ${S}/>
+    <circle cx="112" cy="108" r="4" fill="#343A40" style="pointer-events:none"/>
+    <circle data-fill="bub1" cx="322" cy="52" r="11" ${S}/>
+    <circle data-fill="bub2" cx="348" cy="28" r="7" ${S}/>` },
+  { id: "butterfly", label: "🦋 나비", viewBox: "0 0 400 300", svg: `
+    <path ${LINE} d="M192,86 Q175,55 160,48 M208,86 Q225,55 240,48"/>
+    <path data-fill="lt" d="M188,132 Q78,42 52,112 Q44,164 184,166 Z" ${S}/>
+    <path data-fill="rt" d="M212,132 Q322,42 348,112 Q356,164 216,166 Z" ${S}/>
+    <path data-fill="lb" d="M186,172 Q70,192 96,252 Q124,286 194,196 Z" ${S}/>
+    <path data-fill="rb" d="M214,172 Q330,192 304,252 Q276,286 206,196 Z" ${S}/>
+    <circle data-fill="s1" cx="112" cy="112" r="15" ${S}/>
+    <circle data-fill="s2" cx="288" cy="112" r="15" ${S}/>
+    <circle data-fill="s3" cx="132" cy="224" r="11" ${S}/>
+    <circle data-fill="s4" cx="268" cy="224" r="11" ${S}/>
+    <ellipse data-fill="bodyb" cx="200" cy="165" rx="15" ry="58" ${S}/>
+    <circle data-fill="head" cx="200" cy="98" r="17" ${S}/>` },
+  { id: "flower", label: "🌷 꽃", viewBox: "0 0 400 320", svg: `
+    <path data-fill="stem" d="M194,182 Q188,250 198,312 L214,312 Q206,250 210,182 Z" ${S}/>
+    <path data-fill="leaf1" d="M198,244 Q138,228 128,272 Q170,290 200,258 Z" ${S}/>
+    <path data-fill="leaf2" d="M206,270 Q266,254 276,298 Q234,314 204,286 Z" ${S}/>
+    <ellipse data-fill="p1" cx="200" cy="66" rx="26" ry="44" ${S}/>
+    <ellipse data-fill="p2" cx="200" cy="66" rx="26" ry="44" transform="rotate(60,200,118)" ${S}/>
+    <ellipse data-fill="p3" cx="200" cy="66" rx="26" ry="44" transform="rotate(120,200,118)" ${S}/>
+    <ellipse data-fill="p4" cx="200" cy="66" rx="26" ry="44" transform="rotate(180,200,118)" ${S}/>
+    <ellipse data-fill="p5" cx="200" cy="66" rx="26" ry="44" transform="rotate(240,200,118)" ${S}/>
+    <ellipse data-fill="p6" cx="200" cy="66" rx="26" ry="44" transform="rotate(300,200,118)" ${S}/>
+    <circle data-fill="center" cx="200" cy="118" r="27" ${S}/>` },
+];
+
+const MAX_BRUSH_DROPS = 6;
+let brushDrops = {};
+let eraser = false;
+let currentPic = "car";
+const savedFills = {}; // { picId: { regionId: hex } }
+
+const picTabsEl = document.getElementById("pic-tabs");
+const canvasEl = document.getElementById("canvas-inner");
+const viewportEl = document.getElementById("canvas-viewport");
+const brushSwatchEl = document.getElementById("brush-swatch");
+const brushLabelEl = document.getElementById("brush-label");
+const eraserBtn = document.getElementById("eraser-btn");
+const wipeBtn = document.getElementById("wipe-btn");
+const miniRecipeEl = document.getElementById("mini-recipe");
+const miniPaletteEl = document.getElementById("mini-palette");
+const miniControlsEl = document.getElementById("mini-controls");
+
+/* ── 자동 저장 (IndexedDB, 안 되면 localStorage) ── */
+function openDB() {
+  return new Promise((res, rej) => {
+    if (!window.indexedDB) return rej();
+    const r = indexedDB.open("coloringApp", 1);
+    r.onupgradeneeded = () => r.result.createObjectStore("kv");
+    r.onsuccess = () => res(r.result);
+    r.onerror = () => rej(r.error);
+  });
+}
+async function storeGet(key) {
+  try {
+    const db = await openDB();
+    return await new Promise((res, rej) => {
+      const t = db.transaction("kv").objectStore("kv").get(key);
+      t.onsuccess = () => res(t.result);
+      t.onerror = () => rej();
+    });
+  } catch (e) {
+    try { const v = localStorage.getItem("cg_" + key); return v ? JSON.parse(v) : undefined; }
+    catch (_) { return undefined; }
+  }
+}
+async function storeSet(key, val) {
+  try {
+    const db = await openDB();
+    await new Promise((res, rej) => {
+      const t = db.transaction("kv", "readwrite").objectStore("kv").put(val, key);
+      t.onsuccess = () => res();
+      t.onerror = () => rej();
+    });
+  } catch (e) {
+    try { localStorage.setItem("cg_" + key, JSON.stringify(val)); } catch (_) {}
+  }
+}
+const saveTimers = {};
+function scheduleSave(name, fn) {
+  clearTimeout(saveTimers[name]);
+  saveTimers[name] = setTimeout(fn, 600);
+}
+function saveCustomPics() {
+  const customs = PICTURES.filter(p => p.type === "raster").map(p => ({
+    label: p.label,
+    orig: p.origURL,
+    cur: p.canvas.toDataURL("image/png"),
+  }));
+  storeSet("customPics", customs);
+}
+function saveSvgFills() { storeSet("svgFills", savedFills); }
+
+async function loadSaved() {
+  const fills = await storeGet("svgFills");
+  if (fills && typeof fills === "object") {
+    Object.assign(savedFills, fills);
+    const pic = PICTURES.find(p => p.id === currentPic);
+    if (pic && pic.type !== "raster") showPicture();
+  }
+  const customs = await storeGet("customPics");
+  if (customs && customs.length) {
+    for (const c of customs) {
+      await new Promise((done) => {
+        const img = new Image();
+        img.onload = () => {
+          const pic = makeRasterPicture(img, c.label);
+          if (c.cur) {
+            const cimg = new Image();
+            cimg.onload = () => {
+              pic.ctx.drawImage(cimg, 0, 0, pic.canvas.width, pic.canvas.height);
+              PICTURES.push(pic); done();
+            };
+            cimg.onerror = () => { PICTURES.push(pic); done(); };
+            cimg.src = c.cur;
+          } else { PICTURES.push(pic); done(); }
+        };
+        img.onerror = () => done();
+        img.src = c.orig;
+      });
+    }
+    rebuildPicTabs();
+  }
+}
+
+const picExtraEl = document.getElementById("pic-extra");
+const fileInput = document.getElementById("pic-file");
+let customCount = 0;
+
+function rebuildPicTabs() {
+  picTabsEl.innerHTML = "";
+  for (const pic of PICTURES) {
+    const btn = document.createElement("button");
+    btn.className = "pic-tab" + (pic.id === currentPic ? " active" : "");
+    btn.textContent = pic.label;
+    btn.addEventListener("click", () => {
+      currentPic = pic.id;
+      rebuildPicTabs();
+      showPicture();
+    });
+    picTabsEl.appendChild(btn);
+  }
+  const add = document.createElement("button");
+  add.className = "pic-tab add";
+  add.textContent = "➕ 내 그림";
+  add.addEventListener("click", () => fileInput.click());
+  picTabsEl.appendChild(add);
+}
+
+fileInput.addEventListener("change", () => {
+  const file = fileInput.files[0];
+  if (!file) return;
+  let picName = file.name.replace(/\.[^.]+$/, ""); // 확장자 떼기
+  if (picName.length > 12) picName = picName.slice(0, 12) + "…";
+  const reader = new FileReader();
+  reader.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      customCount++;
+      const pic = makeRasterPicture(img, "🖼️ " + (picName || "그림" + customCount));
+      PICTURES.push(pic);
+      currentPic = pic.id;
+      rebuildPicTabs();
+      showPicture();
+      scheduleSave("pics", saveCustomPics);
+    };
+    img.onerror = () => alert("이 이미지는 열 수 없어요. PNG나 JPG 파일로 다시 해봐요!");
+    img.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+  fileInput.value = "";
+});
+
+function hexToRgb255(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+}
+
+function flashBrushLabel() {
+  brushLabelEl.textContent = "먼저 아래에서 색을 섞어봐!";
+  brushLabelEl.classList.remove("flash");
+  void brushLabelEl.offsetWidth;
+  brushLabelEl.classList.add("flash");
+}
+
+function makeRasterPicture(img, label) {
+  const MAXW = 900;
+  const scale = Math.min(1, MAXW / img.width);
+  const w = Math.max(1, Math.round(img.width * scale));
+  const h = Math.max(1, Math.round(img.height * scale));
+  const canvas = document.createElement("canvas");
+  canvas.width = w; canvas.height = h;
+  canvas.style.width = "100%"; canvas.style.height = "auto";
+  canvas.style.display = "block"; canvas.style.borderRadius = "16px";
+  canvas.style.cursor = "pointer";
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
+  ctx.fillStyle = "#FFFFFF";
+  ctx.fillRect(0, 0, w, h);
+  ctx.drawImage(img, 0, 0, w, h);
+  const original = ctx.getImageData(0, 0, w, h);
+  const pic = { id: "custom" + Date.now() + Math.random(), label, type: "raster", canvas, ctx, original };
+  pic.origURL = canvas.toDataURL("image/png"); // 지금은 원본 상태이므로 그대로 저장용 캡처
+  canvas.addEventListener("click", (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const x = Math.floor((e.clientX - rect.left) * canvas.width / rect.width);
+    const y = Math.floor((e.clientY - rect.top) * canvas.height / rect.height);
+    if (eraser) { floodFill(pic, x, y, null); scheduleSave("pics", saveCustomPics); return; }
+    const brush = mixDrops(brushDrops);
+    if (!brush) { flashBrushLabel(); return; }
+    floodFill(pic, x, y, hexToRgb255(brush.hex));
+    scheduleSave("pics", saveCustomPics);
+  });
+  return pic;
+}
+
+// 페인트 붓기: 누른 곳에서 시작해, '원본 그림의 어두운 선'을 넘지 않고 번져나감
+// fill이 null이면 지우개 → 그 영역을 원본 그림 픽셀로 되돌림 (선화는 절대 안 지워짐)
+const LINE_LUM = 90;   // 원본에서 이보다 어두우면 '선'으로 봄
+const FILL_TOL = 70;   // 현재 화면에서 비슷한 색으로 볼 허용 범위
+function floodFill(pic, sx, sy, fill) {
+  const ctx = pic.ctx;
+  const w = ctx.canvas.width, h = ctx.canvas.height;
+  if (sx < 0 || sy < 0 || sx >= w || sy >= h) return;
+  const imgData = ctx.getImageData(0, 0, w, h);
+  const d = imgData.data;
+  const od = pic.original.data; // 원본(선화) 픽셀
+  const origLum = (p) => 0.299*od[p*4] + 0.587*od[p*4+1] + 0.114*od[p*4+2];
+  const paint = (p) => {
+    const i = p * 4;
+    if (fill) { d[i] = fill[0]; d[i+1] = fill[1]; d[i+2] = fill[2]; d[i+3] = 255; }
+    else { d[i] = od[i]; d[i+1] = od[i+1]; d[i+2] = od[i+2]; d[i+3] = od[i+3]; }
+  };
+  const start = sy * w + sx;
+  if (origLum(start) < LINE_LUM) return; // 선 위를 누르면 아무 일 없음
+  const r0 = d[start*4], g0 = d[start*4+1], b0 = d[start*4+2];
+  if (fill && Math.abs(r0-fill[0]) + Math.abs(g0-fill[1]) + Math.abs(b0-fill[2]) < 12) return;
+  const TOL2 = FILL_TOL * FILL_TOL;
+  const visited = new Uint8Array(w * h);
+  const stack = [start];
+  visited[start] = 1;
+  while (stack.length) {
+    const p = stack.pop();
+    paint(p);
+    const x = p % w, y = (p - x) / w;
+    const nbs = [];
+    if (x > 0) nbs.push(p - 1);
+    if (x < w - 1) nbs.push(p + 1);
+    if (y > 0) nbs.push(p - w);
+    if (y < h - 1) nbs.push(p + w);
+    for (const q of nbs) {
+      if (visited[q]) continue;
+      if (origLum(q) < LINE_LUM) continue; // 원본의 선은 못 넘어감
+      const j = q * 4;
+      const dr = d[j] - r0, dg = d[j+1] - g0, db = d[j+2] - b0;
+      if (dr*dr + dg*dg + db*db > TOL2) continue;
+      visited[q] = 1;
+      stack.push(q);
+    }
+  }
+  // 선 가장자리의 뿌연 테두리(안티앨리어싱)까지 처리해서 흰 띠가 안 남게
+  // (원본 기준으로 판단하므로 지우개일 때는 정확히 원본으로 복원됨)
+  for (let round = 0; round < 2; round++) {
+    const edge = [];
+    for (let p = 0; p < w * h; p++) {
+      if (!visited[p]) continue;
+      const x = p % w, y = (p - x) / w;
+      const nbs = [];
+      if (x > 0) nbs.push(p - 1);
+      if (x < w - 1) nbs.push(p + 1);
+      if (y > 0) nbs.push(p - w);
+      if (y < h - 1) nbs.push(p + w);
+      for (const q of nbs) {
+        if (visited[q]) continue;
+        const lum = origLum(q);
+        if (lum < 235 && lum >= LINE_LUM * 0.55) edge.push(q);
+      }
+    }
+    for (const q of edge) {
+      if (visited[q]) continue;
+      visited[q] = 1;
+      paint(q);
+    }
+    if (edge.length === 0) break;
+  }
+  ctx.putImageData(imgData, 0, 0);
+}
+
+buildPalette(miniPaletteEl, true, (id) => {
+  const total = Object.values(brushDrops).reduce((a, b) => a + b, 0);
+  if (total >= MAX_BRUSH_DROPS) return;
+  brushDrops[id] = (brushDrops[id] || 0) + 1;
+  eraser = false;
+  renderBrush();
+});
+
+function showPicture() {
+  resetZoom();
+  const pic = PICTURES.find(p => p.id === currentPic);
+  picExtraEl.innerHTML = "";
+  if (pic.type === "raster") {
+    canvasEl.innerHTML = "";
+    canvasEl.appendChild(pic.canvas);
+    const rm = document.createElement("button");
+    rm.className = "chip";
+    rm.textContent = "❌ 이 그림 빼기";
+    rm.addEventListener("click", () => {
+      const idx = PICTURES.indexOf(pic);
+      PICTURES.splice(idx, 1);
+      currentPic = "car";
+      rebuildPicTabs();
+      showPicture();
+      scheduleSave("pics", saveCustomPics);
+    });
+    picExtraEl.appendChild(rm);
+    return;
+  }
+  canvasEl.innerHTML = '<svg viewBox="' + pic.viewBox + '" xmlns="http://www.w3.org/2000/svg">' + pic.svg + '</svg>';
+  const fills = savedFills[currentPic] || {};
+  for (const el of canvasEl.querySelectorAll("[data-fill]")) {
+    const saved = fills[el.getAttribute("data-fill")];
+    if (saved) el.setAttribute("fill", saved);
+  }
+  canvasEl.querySelector("svg").addEventListener("click", (e) => {
+    const target = e.target.closest ? e.target.closest("[data-fill]") : null;
+    if (!target) return;
+    const brush = mixDrops(brushDrops);
+    if (eraser) {
+      target.setAttribute("fill", "#FFFFFF");
+      if (savedFills[currentPic]) delete savedFills[currentPic][target.getAttribute("data-fill")];
+      scheduleSave("svg", saveSvgFills);
+      return;
+    }
+    if (!brush) {
+      flashBrushLabel();
+      return;
+    }
+    target.setAttribute("fill", brush.hex);
+    if (!savedFills[currentPic]) savedFills[currentPic] = {};
+    savedFills[currentPic][target.getAttribute("data-fill")] = brush.hex;
+    scheduleSave("svg", saveSvgFills);
+  });
+}
+
+function renderBrush() {
+  const brush = mixDrops(brushDrops);
+  const used = PAINTS.filter(p => brushDrops[p.id] > 0);
+  const total = used.reduce((a, p) => a + brushDrops[p.id], 0);
+
+  brushLabelEl.classList.remove("flash");
+  if (eraser) {
+    brushSwatchEl.style.background = "#FFFFFF";
+    brushLabelEl.textContent = "지우개로 지우는 중!";
+  } else if (brush) {
+    brushSwatchEl.style.background = brush.hex;
+    brushLabelEl.textContent = "지금 붓: " + brush.name;
+  } else {
+    brushSwatchEl.style.background = "repeating-conic-gradient(#F1F3F5 0deg 20deg, #E9ECEF 20deg 40deg)";
+    brushLabelEl.textContent = "아래에서 색을 섞어봐!";
+  }
+  eraserBtn.classList.toggle("active", eraser);
+  miniRecipeEl.textContent = used.map(p => p.name + " " + brushDrops[p.id] + "방울").join(" + ")
+    + (total >= MAX_BRUSH_DROPS ? "  (붓이 가득!)" : "");
+  updatePaletteBadges(miniPaletteEl, brushDrops, total >= MAX_BRUSH_DROPS);
+
+  miniControlsEl.innerHTML = "";
+  if (used.length > 0) {
+    for (const p of used) {
+      const chip = document.createElement("button");
+      chip.className = "chip";
+      const dot = document.createElement("span");
+      dot.className = "dot";
+      dot.style.background = p.hex;
+      chip.appendChild(dot);
+      chip.appendChild(document.createTextNode(p.name + " ➖"));
+      chip.addEventListener("click", () => {
+        brushDrops[p.id]--;
+        if (brushDrops[p.id] <= 0) delete brushDrops[p.id];
+        renderBrush();
+      });
+      miniControlsEl.appendChild(chip);
+    }
+    const clearBtn = document.createElement("button");
+    clearBtn.className = "clear-btn";
+    clearBtn.textContent = "🧼 붓 씻기";
+    clearBtn.addEventListener("click", () => { brushDrops = {}; renderBrush(); });
+    miniControlsEl.appendChild(clearBtn);
+  }
+}
+
+eraserBtn.addEventListener("click", () => { eraser = !eraser; renderBrush(); });
+wipeBtn.addEventListener("click", () => {
+  const pic = PICTURES.find(p => p.id === currentPic);
+  if (pic.type === "raster") {
+    pic.ctx.putImageData(pic.original, 0, 0);
+    scheduleSave("pics", saveCustomPics);
+    return;
+  }
+  savedFills[currentPic] = {};
+  for (const el of canvasEl.querySelectorAll("[data-fill]")) el.setAttribute("fill", "#FFFFFF");
+  scheduleSave("svg", saveSvgFills);
+});
+
+/* ── 확대 / 축소 / 이동 ── */
+let zoom = 1, panX = 0, panY = 0;
+const ZOOM_MIN = 1, ZOOM_MAX = 5;
+const zoomInBtn = document.getElementById("zoom-in");
+const zoomOutBtn = document.getElementById("zoom-out");
+const zoomLevelBtn = document.getElementById("zoom-level");
+
+function clampPan() {
+  const W = viewportEl.clientWidth;
+  const H = canvasEl.offsetHeight; // 뷰포트 높이 = 원래 크기의 그림 높이
+  panX = Math.min(0, Math.max(W - W * zoom, panX));
+  panY = Math.min(0, Math.max(H - H * zoom, panY));
+}
+function applyZoom() {
+  clampPan();
+  canvasEl.style.transform = "translate(" + panX + "px," + panY + "px) scale(" + zoom + ")";
+  zoomLevelBtn.textContent = Math.round(zoom * 100) + "%";
+  viewportEl.style.touchAction = zoom > 1 ? "none" : "pan-y";
+  viewportEl.style.cursor = zoom > 1 ? "grab" : "";
+}
+function resetZoom() { zoom = 1; panX = 0; panY = 0; applyZoom(); }
+
+// 뷰포트 가운데를 기준으로 확대/축소
+function zoomTo(newZoom, cx, cy) {
+  newZoom = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, newZoom));
+  if (cx === undefined) { cx = viewportEl.clientWidth / 2; cy = canvasEl.offsetHeight / 2; }
+  panX = cx - (cx - panX) * (newZoom / zoom);
+  panY = cy - (cy - panY) * (newZoom / zoom);
+  zoom = newZoom;
+  applyZoom();
+}
+zoomInBtn.addEventListener("click", () => zoomTo(zoom * 1.4));
+zoomOutBtn.addEventListener("click", () => zoomTo(zoom / 1.4));
+zoomLevelBtn.addEventListener("click", resetZoom);
+
+// 손가락으로 끌어서 이동 + 두 손가락 핀치 줌
+const pointers = new Map();
+let panMoved = false;
+let pinchStart = null;
+
+viewportEl.addEventListener("pointerdown", (e) => {
+  pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  if (pointers.size === 2) {
+    const [a, b] = [...pointers.values()];
+    pinchStart = {
+      dist: Math.hypot(a.x - b.x, a.y - b.y),
+      zoom, panX, panY,
+      midX: (a.x + b.x) / 2, midY: (a.y + b.y) / 2,
+    };
+  }
+});
+viewportEl.addEventListener("pointermove", (e) => {
+  if (!pointers.has(e.pointerId)) return;
+  const prev = pointers.get(e.pointerId);
+  const cur = { x: e.clientX, y: e.clientY };
+  pointers.set(e.pointerId, cur);
+
+  if (pointers.size === 2 && pinchStart) {
+    const [a, b] = [...pointers.values()];
+    const dist = Math.hypot(a.x - b.x, a.y - b.y);
+    const rect = viewportEl.getBoundingClientRect();
+    const cx = pinchStart.midX - rect.left, cy = pinchStart.midY - rect.top;
+    const newZoom = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, pinchStart.zoom * dist / pinchStart.dist));
+    panX = cx - (cx - pinchStart.panX) * (newZoom / pinchStart.zoom);
+    panY = cy - (cy - pinchStart.panY) * (newZoom / pinchStart.zoom);
+    zoom = newZoom;
+    panMoved = true;
+    applyZoom();
+    e.preventDefault();
+  } else if (pointers.size === 1 && zoom > 1) {
+    const dx = cur.x - prev.x, dy = cur.y - prev.y;
+    if (Math.abs(dx) + Math.abs(dy) > 0) {
+      panX += dx; panY += dy;
+      if (Math.abs(dx) + Math.abs(dy) > 2) panMoved = true;
+      applyZoom();
+      e.preventDefault();
+    }
+  }
+});
+function endPointer(e) {
+  pointers.delete(e.pointerId);
+  if (pointers.size < 2) pinchStart = null;
+  if (pointers.size === 0) setTimeout(() => { panMoved = false; }, 0);
+}
+viewportEl.addEventListener("pointerup", endPointer);
+viewportEl.addEventListener("pointercancel", endPointer);
+// 끌기 동작이었으면 탭(색칠)으로 처리하지 않기
+viewportEl.addEventListener("click", (e) => {
+  if (panMoved) { e.stopPropagation(); e.preventDefault(); }
+}, true);
+
+applyZoom();
+rebuildPicTabs();
+showPicture();
+renderBrush();
+loadSaved().catch(() => {});
+
+/* ═══════ 모드 전환 ═══════ */
+const tabFree = document.getElementById("tab-free");
+const tabQuiz = document.getElementById("tab-quiz");
+const tabColor = document.getElementById("tab-color");
+const freeMode = document.getElementById("free-mode");
+const quizMode = document.getElementById("quiz-mode");
+const colorMode = document.getElementById("color-mode");
+
+function switchTab(activeTab, activeMode) {
+  for (const t of [tabFree, tabQuiz, tabColor]) t.classList.toggle("active", t === activeTab);
+  for (const m of [freeMode, quizMode, colorMode]) m.classList.toggle("hidden", m !== activeMode);
+}
+tabFree.addEventListener("click", () => switchTab(tabFree, freeMode));
+tabQuiz.addEventListener("click", () => {
+  switchTab(tabQuiz, quizMode);
+  if (!quiz) { quiz = makeQuestion(); renderQuiz(); }
+});
+tabColor.addEventListener("click", () => switchTab(tabColor, colorMode));
+</script>
+</body>
+</html>
