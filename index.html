@@ -123,7 +123,7 @@
     background: #FFF; border-radius: 24px; padding: 10px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.1); margin-bottom: 10px;
   }
-  .canvas-viewport { overflow: hidden; border-radius: 16px; position: relative; }
+  .canvas-viewport { overflow: hidden; border-radius: 16px; position: relative; max-height: 68vh; }
   .canvas-inner { transform-origin: 0 0; }
   .canvas-inner svg, .canvas-inner canvas { display: block; width: 100%; height: auto; }
   .canvas-inner svg [data-fill] { cursor: pointer; transition: fill 0.25s ease; }
@@ -249,6 +249,7 @@
     <div class="brush-bar">
       <div class="brush-swatch" id="brush-swatch"></div>
       <div class="brush-label" id="brush-label">아래에서 색을 섞어봐!</div>
+      <button class="tool-btn" id="undo-btn">↩️ 되돌리기</button>
       <button class="tool-btn" id="eraser-btn">🧽 지우개</button>
       <button class="tool-btn" id="wipe-btn">🗑️ 다 지우기</button>
     </div>
@@ -862,7 +863,8 @@ async function fetchRemotePicList() {
         if (r.ok) {
           const j = await r.json();
           if (Array.isArray(j)) {
-            files = j.filter(f => f.type === "file" && /\.(png|jpe?g|webp|gif)$/i.test(f.name)).map(f => f.name);
+            files = j.filter(f => f.type === "file" && /\.(png|jpe?g|webp|gif)$/i.test(f.name))
+                     .map(f => ({ name: f.name, alt: f.download_url }));
           }
         }
       }
@@ -872,7 +874,10 @@ async function fetchRemotePicList() {
   if (!files.length) {
     try {
       const r = await fetch("pics/list.json");
-      if (r.ok) { const j = await r.json(); if (Array.isArray(j)) files = j; }
+      if (r.ok) {
+        const j = await r.json();
+        if (Array.isArray(j)) files = j.map(n => typeof n === "string" ? { name: n, alt: null } : n);
+      }
     } catch (e) {}
   }
   return files;
@@ -885,7 +890,8 @@ async function loadRemotePics() {
   if (!files.length) return;
   let insertAt = PICTURES.findIndex(p => p.type === "raster");
   if (insertAt === -1) insertAt = PICTURES.length;
-  for (const name of files) {
+  for (const f of files) {
+    const name = f.name;
     let label = name.replace(/\.[^.]+$/, "").replace(/^도안[_-]?/, "");
     if (label.length > 12) label = label.slice(0, 12) + "…";
     PICTURES.splice(insertAt++, 0, {
@@ -894,6 +900,7 @@ async function loadRemotePics() {
       type: "remote",
       rname: name,
       url: "pics/" + encodeURIComponent(name),
+      altUrl: f.alt || null,
     });
   }
   rebuildPicTabs();
@@ -915,6 +922,15 @@ function upgradeRemotePic(pic, img) {
     cimg.src = cur;
   }
   return rp;
+}
+
+/* 되돌리기 스택 (그림별, 최근 12개) */
+const undoStacks = {};
+function pushUndo(pic) {
+  const st = undoStacks[pic.id] || (undoStacks[pic.id] = []);
+  if (pic.type === "raster") st.push({ t: "raster", data: pic.canvas.toDataURL("image/png") });
+  else st.push({ t: "svg", fills: Object.assign({}, savedFills[pic.id] || {}) });
+  if (st.length > 12) st.shift();
 }
 
 const picExtraEl = document.getElementById("pic-extra");
@@ -999,9 +1015,10 @@ function makeRasterPicture(img, label) {
     const x = Math.floor((e.clientX - rect.left) * canvas.width / rect.width);
     const y = Math.floor((e.clientY - rect.top) * canvas.height / rect.height);
     const doSave = () => pic.remote ? scheduleSave("remote", saveRemoteState) : scheduleSave("pics", saveCustomPics);
-    if (eraser) { floodFill(pic, x, y, null); doSave(); return; }
+    if (eraser) { pushUndo(pic); floodFill(pic, x, y, null); doSave(); return; }
     const brush = mixDrops(brushDrops);
     if (!brush) { flashBrushLabel(); return; }
+    pushUndo(pic);
     floodFill(pic, x, y, hexToRgb255(brush.hex));
     doSave();
   });
@@ -1094,15 +1111,28 @@ function showPicture() {
   picExtraEl.innerHTML = "";
   if (pic.type === "remote") {
     canvasEl.innerHTML = '<div class="loading-pic">그림 불러오는 중… ⏳</div>';
-    const img = new Image();
-    img.onload = () => {
-      const rp = upgradeRemotePic(pic, img);
-      if (currentPic === rp.id) showPicture();
+    const tryLoad = (src, useCors, onFail) => {
+      const img = new Image();
+      if (useCors) img.crossOrigin = "anonymous";
+      img.onload = () => {
+        try {
+          const rp = upgradeRemotePic(pic, img);
+          if (currentPic === rp.id) showPicture();
+        } catch (err) { onFail(); }
+      };
+      img.onerror = onFail;
+      img.src = src;
     };
-    img.onerror = () => {
-      canvasEl.innerHTML = '<div class="loading-pic">그림을 못 불러왔어 😢<br>인터넷 연결을 확인해봐!</div>';
+    const showFail = () => {
+      canvasEl.innerHTML = '<div class="loading-pic">"' + pic.rname + '" 그림을 못 불러왔어 😢<br>'
+        + '<span style="font-size:14px;">방금 올렸다면 1~2분 뒤에 새로고침해봐!<br>'
+        + 'pics 폴더 안에 파일이 있는지도 확인해줘</span></div>';
     };
-    img.src = pic.url;
+    // 1차: 사이트 안의 pics 폴더 → 실패하면 2차: GitHub 원본 주소
+    tryLoad(pic.url, false, () => {
+      if (pic.altUrl) tryLoad(pic.altUrl, true, showFail);
+      else showFail();
+    });
     return;
   }
   if (pic.type === "raster") {
@@ -1134,6 +1164,7 @@ function showPicture() {
     if (!target) return;
     const brush = mixDrops(brushDrops);
     if (eraser) {
+      pushUndo(pic);
       target.setAttribute("fill", "#FFFFFF");
       if (savedFills[currentPic]) delete savedFills[currentPic][target.getAttribute("data-fill")];
       scheduleSave("svg", saveSvgFills);
@@ -1143,6 +1174,7 @@ function showPicture() {
       flashBrushLabel();
       return;
     }
+    pushUndo(pic);
     target.setAttribute("fill", brush.hex);
     if (!savedFills[currentPic]) savedFills[currentPic] = {};
     savedFills[currentPic][target.getAttribute("data-fill")] = brush.hex;
@@ -1196,9 +1228,39 @@ function renderBrush() {
   }
 }
 
+document.getElementById("undo-btn").addEventListener("click", () => {
+  const pic = PICTURES.find(p => p.id === currentPic);
+  const st = undoStacks[pic.id];
+  if (!st || !st.length) {
+    brushLabelEl.textContent = "되돌릴 게 없어!";
+    brushLabelEl.classList.remove("flash");
+    void brushLabelEl.offsetWidth;
+    brushLabelEl.classList.add("flash");
+    return;
+  }
+  const s = st.pop();
+  if (s.t === "svg") {
+    savedFills[pic.id] = s.fills;
+    for (const el of canvasEl.querySelectorAll("[data-fill]")) {
+      el.setAttribute("fill", s.fills[el.getAttribute("data-fill")] || "#FFFFFF");
+    }
+    scheduleSave("svg", saveSvgFills);
+  } else {
+    const img = new Image();
+    img.onload = () => {
+      pic.ctx.drawImage(img, 0, 0, pic.canvas.width, pic.canvas.height);
+      if (pic.remote) scheduleSave("remote", saveRemoteState);
+      else scheduleSave("pics", saveCustomPics);
+    };
+    img.src = s.data;
+  }
+});
+
 eraserBtn.addEventListener("click", () => { eraser = !eraser; renderBrush(); });
 wipeBtn.addEventListener("click", () => {
   const pic = PICTURES.find(p => p.id === currentPic);
+  if (pic.type === "remote") return; // 아직 로딩 전
+  pushUndo(pic);
   if (pic.type === "raster") {
     pic.ctx.putImageData(pic.original, 0, 0);
     if (pic.remote) scheduleSave("remote", saveRemoteState);
@@ -1350,6 +1412,8 @@ function renderGallery() {
 function loadEntry(entry) {
   galleryModal.classList.add("hidden");
   if (entry.type === "svg") {
+    const target = PICTURES.find(p => p.id === entry.picId);
+    if (target) pushUndo(target);
     savedFills[entry.picId] = Object.assign({}, entry.fills);
     currentPic = entry.picId;
     scheduleSave("svg", saveSvgFills);
@@ -1369,6 +1433,7 @@ function loadEntry(entry) {
   };
   const existing = PICTURES.find(p => p.type === "raster" && p.origURL === entry.orig);
   if (existing) {
+    pushUndo(existing);
     applyCur(existing);
     currentPic = existing.id;
     rebuildPicTabs();
@@ -1405,18 +1470,26 @@ const zoomInBtn = document.getElementById("zoom-in");
 const zoomOutBtn = document.getElementById("zoom-out");
 const zoomLevelBtn = document.getElementById("zoom-level");
 
+function isPannable() {
+  const CW = viewportEl.clientWidth * zoom;
+  const CH = canvasEl.offsetHeight * zoom;
+  return CW > viewportEl.clientWidth + 1 || CH > viewportEl.clientHeight + 1;
+}
 function clampPan() {
   const W = viewportEl.clientWidth;
-  const H = canvasEl.offsetHeight; // 뷰포트 높이 = 원래 크기의 그림 높이
-  panX = Math.min(0, Math.max(W - W * zoom, panX));
-  panY = Math.min(0, Math.max(H - H * zoom, panY));
+  const VH = viewportEl.clientHeight;
+  const CW = W * zoom;
+  const CH = canvasEl.offsetHeight * zoom;
+  panX = CW <= W ? 0 : Math.min(0, Math.max(W - CW, panX));
+  panY = CH <= VH ? 0 : Math.min(0, Math.max(VH - CH, panY));
 }
 function applyZoom() {
   clampPan();
   canvasEl.style.transform = "translate(" + panX + "px," + panY + "px) scale(" + zoom + ")";
   zoomLevelBtn.textContent = Math.round(zoom * 100) + "%";
-  viewportEl.style.touchAction = zoom > 1 ? "none" : "pan-y";
-  viewportEl.style.cursor = zoom > 1 ? "grab" : "";
+  const pannable = isPannable();
+  viewportEl.style.touchAction = pannable ? "none" : "pan-y";
+  viewportEl.style.cursor = pannable ? "grab" : "";
 }
 function resetZoom() { zoom = 1; panX = 0; panY = 0; applyZoom(); }
 
@@ -1439,6 +1512,7 @@ let panMoved = false;
 let pinchStart = null;
 
 viewportEl.addEventListener("pointerdown", (e) => {
+  try { viewportEl.setPointerCapture(e.pointerId); } catch (err) {}
   pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
   if (pointers.size === 2) {
     const [a, b] = [...pointers.values()];
@@ -1467,7 +1541,7 @@ viewportEl.addEventListener("pointermove", (e) => {
     panMoved = true;
     applyZoom();
     e.preventDefault();
-  } else if (pointers.size === 1 && zoom > 1) {
+  } else if (pointers.size === 1 && isPannable()) {
     const dx = cur.x - prev.x, dy = cur.y - prev.y;
     if (Math.abs(dx) + Math.abs(dy) > 0) {
       panX += dx; panY += dy;
